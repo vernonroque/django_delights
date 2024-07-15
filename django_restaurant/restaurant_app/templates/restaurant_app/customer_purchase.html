@@ -1,0 +1,13 @@
+{%extends "restaurant_app/base.html"%}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'restaurant_app/styles.css' %}">
+{% endblock %}
+
+{%block content%}
+<h1>This is the customer purchase section</h1>
+<p>Input customer purchase here</p>
+<a href = "{%url 'home'%}">Home</a>
+{%endblock%}

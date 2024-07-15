@@ -1,0 +1,17 @@
+{%extends "restaurant_app/base.html"%}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'restaurant_app/styles.css' %}">
+{% endblock %}
+
+{%block content%}
+<p>Welcome {{name}}!</p>
+{%for recipe in recipes%}
+<p>My recipe is {{recipe.recipe_name}}</p>
+{%endfor%}
+<a href="{%url 'new_recipe'%}">New recipe section</a>
+<a href="{%url 'new_ingredient'%}">New ingredient section</a>
+<a href="{%url 'customer_purchase'%}">Customer purchase section</a>
+{%endblock%}
