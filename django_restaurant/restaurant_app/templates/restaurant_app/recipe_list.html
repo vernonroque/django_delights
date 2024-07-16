@@ -1,0 +1,17 @@
+{%extends "restaurant_app/base.html"%}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'restaurant_app/styles.css' %}">
+{% endblock %}
+
+{%block content%}
+<h1>Here is the current recipe list</h1>
+<ul>
+    {% for recipe in recipes %}
+      <li>{{ recipe.name }} - {{ recipe.description }} - ${{ recipe.cost }}</li>
+    {% endfor %}
+  </ul>
+
+{%endblock%}
