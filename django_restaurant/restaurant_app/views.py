@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Recipe, Ingredient, Purchase
+from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
@@ -33,12 +34,24 @@ class RecipeList(ListView):
     template_name = 'restaurant_app/recipe_list.html'
     context_object_name = 'recipes'
 
-#I don't think i need class based view of RecipeCreate
-# class RecipeCreate(CreateView):
-#   model = Recipe
-#   template_name = "restaurant_app/recipe_create_form.html"
-#   fields = ["name", "description", "cost"]
+class RecipeCreate(CreateView):
+    model = Recipe
+    template_name = "restaurant_app/recipe_create_form.html"
+    fields = ["name", "description", "cost"]
+    success_url = reverse_lazy('recipelist')
 
+class RecipeUpdate(UpdateView):
+    model = Recipe
+    template_name = 'restaurant_app/recipe_update_form.html'
+    fields = ["name", "description", "cost"]
+    success_url = reverse_lazy('recipelist')
+
+class RecipeDelete(DeleteView):
+    model = Recipe
+    template_name = 'restaurant_app/recipe_delete_form.html'
+    success_url = reverse_lazy('recipelist')
+
+#Another way to create a form with more customization
 def new_recipe(request):
     if request.method == "POST":
         form = RecipeCreateForm(request.POST)
