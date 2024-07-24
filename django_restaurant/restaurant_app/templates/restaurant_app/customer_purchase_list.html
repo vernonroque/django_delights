@@ -1,0 +1,22 @@
+{%extends "restaurant_app/base.html"%}
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'restaurant_app/styles.css' %}">
+ 
+{% endblock %}
+
+{%block content%}
+<h1>Here is the current customer purchase list</h1>
+<a href ="{% url 'customerpurchasecreate' %}">Add a purchase</a>
+<ul>
+    {% for purchase in purchases %}
+      <li>{{ purchase.item_purchased }}</li>
+    
+</ul>
+    <a href ="{% url 'customerpurchaseupdate' purchase.id%}"><button>Update</button></a>
+    <a href ="{% url 'customerpurchasedelete' purchase.id%}"><button>Delete</button></a>
+    
+      {% endfor %}
+{%endblock%}

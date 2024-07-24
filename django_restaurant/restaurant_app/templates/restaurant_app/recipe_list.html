@@ -8,12 +8,13 @@
 
 {%block content%}
 <h1>Here is the current recipe list</h1>
+<a href ="{% url 'recipecreate' %}">Create a recipe</a>
 <ul>
     {% for recipe in recipes %}
       <li>{{ recipe.name }} - {{ recipe.description }} - ${{ recipe.cost }}</li>
-      <a href ="{% url 'recipeupdate' recipe.id%}"><button>Update</button></a>
-      <a href ="{% url 'recipedelete' recipe.id%}"><button>Delete</button></a>
+      <a href ="{% url 'recipeupdate' recipe.id %}"><button>Update</button></a>
+      <a href ="{% url 'recipedelete' recipe.id %}"><button>Delete</button></a>
     {% endfor %}
-  </ul>
+</ul>
 
 {%endblock%}

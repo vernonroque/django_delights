@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 
 <html>
+
+  {% load static %}
+  
   <head>
     
     {% block head %}
     {% endblock %}
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 
   </head>
   <body>
-    <h1>Welcome to Baus Base page!</h1>
+    <h1>Welcome to Django Delights!</h1>
+
+    <i class="fa-solid fa-house fa-5x"></i>
+    <a href = "{%url 'home'%}">Home</a>
+
     {%block content%}
     {%endblock%}
   </body>
