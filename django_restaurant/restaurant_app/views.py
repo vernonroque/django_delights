@@ -25,8 +25,9 @@ class RecipeList(ListView):
 
 class RecipeCreate(CreateView):
     model = Recipe
+    form_class = RecipeCreateForm  # Use your custom form with specific fields and widgets
     template_name = "restaurant_app/recipe_create_form.html"
-    fields = ["name", "description", "cost"]
+    #fields = ["name", "description", "cost"]
     success_url = reverse_lazy('recipelist')
 
 class RecipeUpdate(UpdateView):

@@ -2,22 +2,26 @@ from django.db import models
 
 # Create your models here.
 
-class Recipe(models.Model):
-    name = models.CharField(max_length = 200)
-    description = models.TextField()
-    cost = models.DecimalField(max_digits = 10, decimal_places = 2)
-    created_at = models.DateTimeField(auto_now_add=True)  # Set on creation
-    updated_at = models.DateTimeField(auto_now=True)      # Set on each save
-    
-    def __str__(self):
-        return self.name
-
 class Ingredient(models.Model):
     name = models.CharField(max_length = 200)
     price_per_unit = models.DecimalField(max_digits = 10, decimal_places = 2)
     items_available = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)  # Set on creation
     updated_at = models.DateTimeField(auto_now=True)      # Set on each save
+
+    def __str__(self):
+        return self.name  # This ensures the name is used in the representation
+
+class Recipe(models.Model):
+    name = models.CharField(max_length = 200)
+    description = models.TextField()
+    cost = models.DecimalField(max_digits = 10, decimal_places = 2)
+    ingredients = models.ManyToManyField(Ingredient, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)  # Set on creation
+    updated_at = models.DateTimeField(auto_now=True)      # Set on each save
+    
+    def __str__(self):
+        return self.name
 
     #recipe = models.ForeignKey(Recipe,on_delete=models.CASCADE)
 class Purchase(models.Model):

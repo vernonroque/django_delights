@@ -35,3 +35,9 @@ body{
     align-items:center;
     margin:40px;
 }
+.recipe-field{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
