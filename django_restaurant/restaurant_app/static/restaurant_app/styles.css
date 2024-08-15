@@ -13,7 +13,6 @@ body{
     justify-content:center;
     align-items:center;
     margin:20px;
-
 }
 .ingredient-tab{
     display:flex;
@@ -40,4 +39,11 @@ body{
     flex-direction:column;
     justify-content:center;
     align-items:center;
+}
+.ingredient-field{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
 }

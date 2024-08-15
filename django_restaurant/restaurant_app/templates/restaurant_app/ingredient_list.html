@@ -12,7 +12,7 @@
 <a href ="{% url 'ingredientcreate' %}">Add an ingredient</a>
 <ul>
     {% for ingredient in ingredients %}
-      <li>{{ ingredient.name }} - {{ ingredient.price_per_unit }} - ${{ ingredient.items_available }}</li>
+      <li>{{ ingredient.name }} - ${{ ingredient.price_per_unit }} - {{ ingredient.items_available }}</li>
       <a href ="{% url 'ingredientupdate' ingredient.id%}"><button>Update</button></a>
       <a href ="{% url 'ingredientdelete' ingredient.id%}"><button>Delete</button></a>
     {% endfor %}

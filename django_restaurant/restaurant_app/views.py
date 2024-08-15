@@ -5,8 +5,10 @@ from .models import Recipe, Ingredient, Purchase
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.db.models import Sum
 
-from .forms import RecipeCreateForm
+
+from .forms import RecipeCreateForm, PurchaseForm
 
 # recipes = [{
 #     'recipe_name':'grilled cheese', 
@@ -68,16 +70,25 @@ class PurchaseList(ListView):
     template_name = 'restaurant_app/customer_purchase_list.html'
     context_object_name = 'purchases'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Calculate the total sum of all purchases
+        context['total_sum'] = Purchase.objects.aggregate(total_sum=Sum('recipe__cost'))['total_sum'] or 0
+        return context
+
+
 class CustomerPurchaseCreate(CreateView):
     model = Purchase
+    form_class = PurchaseForm
     template_name = "restaurant_app/customer_purchase_create_form.html"
-    fields = "__all__"
+    #fields = "__all__"
     success_url = reverse_lazy('customerpurchaselist')
 
 class CustomerPurchaseUpdate(UpdateView):
     model = Purchase
+    form_class = PurchaseForm
     template_name = 'restaurant_app/customer_purchase_update_form.html'
-    fields = "__all__"
+    #fields = "__all__"
     success_url = reverse_lazy('customerpurchaselist')
 
 class CustomerPurchaseDelete(DeleteView):

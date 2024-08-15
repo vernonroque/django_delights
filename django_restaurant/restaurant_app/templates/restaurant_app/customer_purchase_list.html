@@ -13,10 +13,12 @@
 <ul>
     {% for purchase in purchases %}
       <li>{{ purchase.item_purchased }}</li>
+      <li>{{ purchase.recipe.cost }}</li>
     
 </ul>
     <a href ="{% url 'customerpurchaseupdate' purchase.id%}"><button>Update</button></a>
     <a href ="{% url 'customerpurchasedelete' purchase.id%}"><button>Delete</button></a>
     
       {% endfor %}
+<h2>Total amount:{{ total_sum }} </h2>
 {%endblock%}

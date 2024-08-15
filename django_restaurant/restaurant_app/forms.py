@@ -1,5 +1,5 @@
 from django import forms
-from .models import Recipe
+from .models import Purchase, Recipe
 
 class RecipeCreateForm(forms.ModelForm):
     class Meta:
@@ -7,4 +7,12 @@ class RecipeCreateForm(forms.ModelForm):
         fields = ('name', 'description', 'cost','ingredients')
         widgets = {
             'ingredients': forms.CheckboxSelectMultiple
+        }
+
+class PurchaseForm(forms.ModelForm):
+    class Meta:
+        model = Purchase
+        fields = ['item_purchased', 'recipe']  # Include the 'recipe' field
+        widgets = {
+            'recipe': forms.Select(),  # Ensure the recipe field is rendered as a dropdown menu
         }

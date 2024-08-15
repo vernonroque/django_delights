@@ -8,9 +8,19 @@
 {% endblock %}
 <h2>Enter New Ingredient</h2>
 <form method="post">
-<div>
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Submit" />
-</div>
+    {% csrf_token %}
+    <div class="ingredient-field">
+          <label for="name">Name</label>
+          {{form.name}}
+
+          <label for="price_per_unit">Cost</label>
+          {{form.price_per_unit}}
+
+          <label for="items_available">Items Available</label>
+          {{form.items_available}}
+      
+    </div>
+ 
+    <button type="submit">Save Ingredient</button>
 </form>
 {% endblock %}
