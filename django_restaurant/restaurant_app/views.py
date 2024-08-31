@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Recipe, Ingredient, Purchase
@@ -8,7 +9,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.db.models import Sum
 
 
-from .forms import RecipeCreateForm, PurchaseForm
+from .forms import RecipeCreateForm, PurchaseForm, RecipeUpdateForm
 
 # recipes = [{
 #     'recipe_name':'grilled cheese', 
@@ -19,6 +20,22 @@ from .forms import RecipeCreateForm, PurchaseForm
 def home(request):
     #context = {"name": "Jenkins","recipes":recipes}
     return render(request,"restaurant_app/home.html")
+
+def login_view(request):
+  context = {
+    "login_view": "active"
+  }
+  if request.method == "POST":
+    username = request.POST["username"]
+    password = request.POST["password"]
+    # Add your code below:
+    user = authenticate(request, username = username, password = password)
+    
+    if user is not None:
+      return redirect("home")
+    else:
+      return HttpResponse("invalid credentials")
+  return render(request, "registration/login.html", context)
 
 class RecipeList(ListView):
     model = Recipe
@@ -34,8 +51,9 @@ class RecipeCreate(CreateView):
 
 class RecipeUpdate(UpdateView):
     model = Recipe
+    form_class = RecipeUpdateForm  # Use your custom form with specific fields and widgets
     template_name = 'restaurant_app/recipe_update_form.html'
-    fields = ["name", "description", "cost"]
+    #fields = ["name", "description", "cost"]
     success_url = reverse_lazy('recipelist')
 
 class RecipeDelete(DeleteView):
@@ -74,6 +92,8 @@ class PurchaseList(ListView):
         context = super().get_context_data(**kwargs)
         # Calculate the total sum of all purchases
         context['total_sum'] = Purchase.objects.aggregate(total_sum=Sum('recipe__cost'))['total_sum'] or 0
+        # here is where i have to write the logic to subtract 1 from the quantity
+        # for a specific ingredient
         return context
 
 

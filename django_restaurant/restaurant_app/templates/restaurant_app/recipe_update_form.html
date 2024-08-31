@@ -9,9 +9,20 @@
 {% block content %}
 <h2>Update Recipe</h2>
 <form method="post">
-<div>
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Submit" />
-</div>
+      {% csrf_token %}
+  <div class="recipe-field">
+      <label for="name">Name</label>
+      {{form.name}}
+
+      <label for="cost">Cost</label>
+      {{form.cost}}
+
+      <label for="ingredients">Ingredients</label>
+      {{form.ingredients}}
+      
+      <label for="description">Description</label>
+      {{form.description}}
+  </div>
+      <button type="submit">Save Recipe</button>
 </form>
 {% endblock %}

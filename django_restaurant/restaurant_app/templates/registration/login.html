@@ -1,0 +1,17 @@
+
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'restaurant_app/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Log in!</h1>
+<form class ="login-form" method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Username"><label for="password">Password:</label>
+    <input type="password" name="password" placeholder="Password">
+    <input type="submit" name="" value="Login">
+</form>
+{% endblock %}
